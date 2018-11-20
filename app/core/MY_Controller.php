@@ -61,6 +61,9 @@ class BaseController extends CI_Controller{
 		}
 	}
 
+	public function viewAjax($layout, $data=[]){
+		return $this->load->view($layout, $data);
+	}
 
 	public function isPost(){
 		if($this->input->method() == "post"){
