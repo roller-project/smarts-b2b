@@ -32,6 +32,9 @@ header .navbar-collapse.show{
 	border-right:1px solid #ddd;
 }
 
+.no-mrb{
+	margin-bottom: 0;
+}
 .menu-left{
 	position: -webkit-sticky;
 	position: sticky;
