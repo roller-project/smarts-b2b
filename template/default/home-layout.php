@@ -91,14 +91,14 @@
     
     <aside>
         <div class="d-flex">
-            <div id="leftSlider" class="col-xl-3 col-lg-4 border-right text-right menu-left hidden-md-down" style="padding-right: 0;">
+            <div id="leftSlider" class="col-xl-3 col-lg-4 border-right text-left menu-left hidden-md-down" style="padding-right: 0;">
                 <div class="content">
-                    <ul class="list-group">
-                      <li class="list-group-item">Cras justo odio</li>
-                      <li class="list-group-item">Dapibus ac facilisis in</li>
-                      <li class="list-group-item">Morbi leo risus</li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+                    <ul class="menu">
+                      <li>Cras justo odio</li>
+                      <li>Dapibus ac facilisis in</li>
+                      <li>Morbi leo risus</li>
+                      <li>Porta ac consectetur ac</li>
+                      <li>Vestibulum at eros</li>
                     </ul>
                 </div>
             </div>
@@ -133,8 +133,9 @@
       <div class="menu" style="position: relative; padding-right: 10px;">
         
         <ul>
+          <li style="height: 60px;"></li>
           <li>
-            <div style="position: relative; display: block; border-bottom: 1px solid #ddd;" class="clearfix">
+            <div style="position: relative; display: block; border-bottom: 1px solid #ddd; padding-bottom:15px; margin-bottom: 15px; " class="clearfix">
               <div style="float: left; width: 60px; height: 60px; border-radius: 100px; background-color: red;"></div>
               <div style="margin-left: 70px; text-align: left;">
                 Sign in with<br>

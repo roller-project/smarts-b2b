@@ -155,7 +155,37 @@ footer{
 	padding: 5px 8px;
 	display: block;
 	text-align: left;
+	color: #FFF;
 }
+
+#leftSlider .menu{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+#leftSlider .menu > li a{
+	padding: 7px 8px;
+	display: block;
+}
+
+#leftSlider .content{
+	max-width: 250px;
+	margin:auto; 
+	margin-right: 0;
+}
+#leftSlider .content .header{
+	text-transform: uppercase;
+	color: #444;
+}
+
+main{
+	padding-top: 15px;
+}
+main .header{
+	border-left:2px solid green;
+	padding-left: 15px;
+}
+
 
 @media(min-width: 1650px){
 	.container{
