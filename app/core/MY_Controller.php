@@ -11,7 +11,7 @@ class BaseController extends CI_Controller{
 		parent::__construct();
 		$this->load->library(['session','email','user_agent']);
 		$this->load->helper(['url','form']);
-		$this->load->model(['account_model']);
+		$this->load->model(['account_model','app_model']);
 		
 	}
 
@@ -126,14 +126,11 @@ class BaseController extends CI_Controller{
 		return $html;
 	}
 
+
+	
+
 }
-class HomeController extends BaseController{
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->database();
-	}
-}
+
 
 class AdminController extends BaseController{
 	function __construct()
@@ -143,7 +140,21 @@ class AdminController extends BaseController{
 	}
 }
 
+/**
+ * 
+ */
+class Apps extends BaseController
+{
+	
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->database();
+		$this->app = $this->app_model->config();
 
+		$this->set_meta($this->app->name,$this->app->description,$this->app->image);
+	}
+}
 
 
 class ApiController extends BaseController{

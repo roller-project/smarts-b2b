@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <title>Smart Exchange - Blockchain Assets Trading Platform</title>
+  <title><?php echo $title;?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="https://smarts.exchange/template/default/browserconfig.xml">
@@ -11,15 +11,15 @@
 
 
     <meta name="twitter:url" content="https://smarts.exchange/">
-    <meta name="twitter:title" content="Smart Exchange - Blockchain Assets Trading Platform">
+    <meta name="twitter:title" content="<?php echo $title;?>">
     <meta name="twitter:description" content="The best exchange. Support all coin listing free. Free 100k member fee trade. API V3 Support, Websocket">
-    <meta name="twitter:image" content="/resource/banner.jpg">
+    <meta name="twitter:image" content="<?php echo $image;?>">
     <meta name="twitter:creator" content="https://smarts.exchange">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@smartexchange">
 
-    <meta property="og:title" content="Smart Exchange - Blockchain Assets Trading Platform">
-    <meta property="og:image" content="/resource/banner.jpg">
+    <meta property="og:title" content="<?php echo $title;?>">
+    <meta property="og:image" content="<?php echo $image;?>">
     <meta property="og:description" content="The best exchange. Support all coin listing free. Free 100k member fee trade. API V3 Support, Websocket">
     <meta property="article:author" content="smartexchange">
     <meta property="og:url" content="https://smarts.exchange/">
@@ -35,7 +35,7 @@
   <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo site_url("resource/js/apps.js");?>"></script>
   
   <meta name="google-site-verification" content="M329jGz1izszNrlin_lnP_ssu8VrX0rRvwve1L8sVhk" />
- <link rel="stylesheet" href="https://smarts.exchange/resource/icons/css/all.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="<?php echo site_url("resource/icons/css/all.css");?>" crossorigin="anonymous">
 
  <link rel="stylesheet" href="<?php echo site_url("template/default/style.css");?>" crossorigin="anonymous">
 </head>
@@ -49,8 +49,8 @@
               </button>
 
                 <a class="navbar-brand" href="#">
-                    <img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/spaces%2F-LQDaH_qYRQ9MAWqUKcK%2Favatar.png?generation=1541064437424233&alt=media" width="30" height="30" class="d-inline-block align-top" alt="">
-                    Smarts Exchange B2B
+                    <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <?php echo $this->app_model->item("name");?>
                 </a>
 
               
@@ -91,7 +91,7 @@
     
     <aside>
         <div class="d-flex">
-            <div class="col-xl-3 col-lg-4 border-right text-right menu-left hidden-md-down" style="padding-right: 0;">
+            <div id="leftSlider" class="col-xl-3 col-lg-4 border-right text-right menu-left hidden-md-down" style="padding-right: 0;">
                 <div class="content">
                     <ul class="list-group">
                       <li class="list-group-item">Cras justo odio</li>
@@ -105,43 +105,75 @@
             <main class="col-xl-6 col-lg-7 col-sm-12">
                 
                 <div style="padding-left: 50px; padding-right: 50px;">
-                <?php 
-                $data = "
-                1.  “Crypto assets” shall mean such type of assets which can only and exclusively be transmitted by means of block-chain technology, including but not limited to digital coins and digital tokens and any other type of digital mediums of exchange, such as Bitcoin, Ethereum, Ripple, etc, to the full and absolute exempt of the securities of any kind.
-
-2.  “Deposit/Withdrawal” of crypto assets shall mean remittance of crypto assets to/from HitBTC Account from/to external third-party service accordingly.
-
-3.   “Smarts Exchange Account” is a User account accessible after the registration process and via the Services where crypto assets may be stored and operated by Smarts Exchange on behalf of a User.
-
-4.  Third-Party Content is the content provided by third parties, including without limitation links to web pages of such parties, which may be represented on the Technology Platform.
-
- 5. “Trade” shall be understood as an exchange of the crypto asset of one type, owned by one Smarts Exchange Account User, to the crypto asset of another type, owned by the same or another Smarts Exchange Account User, at the terms and conditions set forth by such exchange parties, and which is executed solely and exclusively within the Technology Platform with crypto assets deposited to those Users’ Smarts Exchange Accounts. In no case shall the Trade be deemed or construed to be a marginal trade.
-
- 6. “Transfer” for the purposes herein shall mean a record of Deposit, Withdrawal and/or Trade transaction of crypto asset into, out from or at User’s SE Account, which is technically executed by SE in accordance with User’s Deposit/Withdrawal request or Trade order.
-
-7.  API  (Application Programming Interface): Here you will be able to find out information pertaining to developing and maintaining an API connection with SE. We offer a fully featured REST API and a powerful streaming WebSocket API.
-
-8. Exchange fee  SE initially will charge a 0.07% fixed fee per trade. Other variations will be subsequently introduced, including maker-taker, volumed based tiering and 0 fee promotions.
-
-9. Deposit fee SE don't charge any fee relate deposit.
-
-10. Withdrawal fee  SE may charge a small fee for withdrawals depend on each cryptocurrency.
-";
-echo nl2br($data);
-?>
-            </div>
+                    <?php print_r($content)?>
+                </div>
             </main>
             <div class="col-lg-2 hidden-md-down">
                 Con voi
             </div>
         </div>
     </aside>
-    <footer class="container">
-        <div class="alert alert-primary" role="alert">
-          A simple primary alert—check it out!
+    <footer>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-1">
+            <button class="btn btn-lg btn-primary btn-block btn-admin"><i class="fas fa-sliders-h"></i></button>
+          </div>
+          <div class="col-lg-11">
+            <div class="alert alert-primary" role="alert">
+              A simple primary alert—check it out!
+            </div>
+          </div>
         </div>
+      </div>
     </footer>
     
+<div class="admin">
+    <div class="panel">
+      <div class="menu" style="position: relative; padding-right: 10px;">
+        
+        <ul>
+          <li>
+            <div style="position: relative; display: block; border-bottom: 1px solid #ddd;" class="clearfix">
+              <div style="float: left; width: 60px; height: 60px; border-radius: 100px; background-color: red;"></div>
+              <div style="margin-left: 70px; text-align: left;">
+                Sign in with<br>
+                Administrator
+              </div>
+            </div>
+          </li>
+          <li><a><i class="fab fa-accusoft"></i> Customization</a></li>
+          <li><a><i class="fas fa-eye"></i> Audience</a></li>
+          <li><a><i class="fas fa-chalkboard-teacher"></i> Teams</a></li>
+          <li><a><i class="fas fa-globe"></i> Domains</a></li>
+          <li><a><i class="fas fa-chart-line"></i> Integrations</a></li>
+          <li><a><i class="fas fa-bezier-curve"></i> Insights</a></li>
+          <li><a><i class="fas fa-search"></i> Search</a></li>
+          <li><a><i class="fas fa-cog"></i> Advanced</a></li>
+        </ul>
+      </div>
+      <div class="outbutton"><button class="btn btn-primary btn-admin"><i class="fas fa-arrow-left"></i></button></div>
+    </div>
+    <div class="panel-after">
+    </div>
 
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".admin .panel-after").on("click", function(){
+      $(".admin").toggleClass('show');
+    });
+
+    $(".admin .outbutton").on("click", function(){
+      $(".admin").toggleClass('show');
+    });
+
+
+    $(".btn-admin").on("click", function(){
+      $(".admin").toggleClass('show');
+    });
+  });
+</script>
 </body>
 </html>
