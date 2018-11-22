@@ -1,4 +1,4 @@
-<div class="admin">
+
     <div class="control">
       <div class="add-control"></div>
     </div>
@@ -30,5 +30,3 @@
     </div>
     <div class="panel-after">
     </div>
-
-</div>

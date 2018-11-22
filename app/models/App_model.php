@@ -10,7 +10,7 @@ class App_model extends DB_Model{
 	public function config(){
 		$domain = $this->getDomainApps();
 		$data = $this->db->get_where("apps",["app_domain" => $domain])->row();
-		if(!isset($data->app_config)){
+		if(!isset($data->app_id)){
 			$data = new stdClass;
 			$arv = [
 				"name" => "Smarts B2B",
@@ -40,7 +40,7 @@ class App_model extends DB_Model{
 			];
 
 
-			$data->app_config = json_encode($this->magre_data($arv,$data->app_config));
+			$data->app_config = json_encode($this->magre_data($arv,($data->app_config ? $data->app_config : '{}')));
 
 		}
 
@@ -67,7 +67,7 @@ class App_model extends DB_Model{
 			$obj2 = $this->object_to_array($obj2);
 		}
 
-		return array_merge($obj1, $obj2);
+		return array_merge($obj1, (is_array($obj2) ? $obj2 : []));
 	}
 
 

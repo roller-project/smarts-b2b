@@ -122,7 +122,7 @@
       </div>
     </aside>
 
-
+<?php if($is_login == getItems("app.app_author")){ ?>
     <footer>
       <div class="container-fluid">
         <div class="row">
@@ -137,7 +137,13 @@
         </div>
       </div>
     </footer>
-    
+    <div class="admin"></div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".admin").load("/admin");
+      });
+    </script>
+<?php } ?>
 
 
 </body>

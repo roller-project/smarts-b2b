@@ -45,7 +45,7 @@ class BaseController extends CI_Controller{
 		$is_login = $this->account_model->get_login_id();
 		//$is_admin = $this->app_model->get_admin($is_login);
 		//$is_team = $this->app_model->get_team($is_login);
-
+		$is_login = 1;
 		$data = array_merge($data,["is_login" => $is_login]);
 		
 		if($this->getLayout()){
