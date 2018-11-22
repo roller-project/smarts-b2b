@@ -13,9 +13,16 @@
 	"require": {
 		"php": ">=5.3.7"
 	},
+	"autoload": {
+			
+			"psr-4" : {
+				"plugins\\" : "plugins/"
+			}
+	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
+
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*",
 		"phpunit/phpunit": "4.* || 5.*"

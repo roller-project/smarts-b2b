@@ -33,7 +33,8 @@
 
   
   <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo site_url("resource/js/apps.js");?>"></script>
-  
+  <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo site_url("resource/js/main.js");?>"></script>
+
   <meta name="google-site-verification" content="M329jGz1izszNrlin_lnP_ssu8VrX0rRvwve1L8sVhk" />
  <link rel="stylesheet" href="<?php echo site_url("resource/icons/css/all.css");?>" crossorigin="anonymous">
 
@@ -50,7 +51,7 @@
 
                 <a class="navbar-brand" href="#">
                     <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
-                    <?php echo $this->app_model->item("name");?>
+                    <?php echo getItems("app.name");?>
                 </a>
 
               
@@ -90,8 +91,10 @@
 
     
     <aside>
-        <div class="d-flex">
-            <div id="leftSlider" class="col-xl-3 col-lg-4 border-right text-left menu-left hidden-md-down" style="padding-right: 0;">
+      <div class="main_content">
+        <div class="main">
+
+            <div id="leftSlider" class="hidden-md-down" style="padding-right: 0;">
                 <div class="content">
                     <ul class="menu">
                       <li>Cras justo odio</li>
@@ -102,17 +105,24 @@
                     </ul>
                 </div>
             </div>
-            <main class="col-xl-6 col-lg-7 col-sm-12">
+            <main>
                 
-                <div style="padding-left: 50px; padding-right: 50px;">
-                    <?php print_r($content)?>
+                <div class="dashboard">
+                    <div class="content">
+                      <?php print_r($content)?>
+                    </div>
+
+                    <div id="rightSlider" class="hidden-md-down">
+                      Con voi
+                    </div>
                 </div>
             </main>
-            <div class="col-lg-2 hidden-md-down">
-                Con voi
-            </div>
+            
         </div>
+      </div>
     </aside>
+
+
     <footer>
       <div class="container-fluid">
         <div class="row">
@@ -128,53 +138,7 @@
       </div>
     </footer>
     
-<div class="admin">
-    <div class="panel">
-      <div class="menu" style="position: relative; padding-right: 10px;">
-        
-        <ul>
-          <li style="height: 60px;"></li>
-          <li>
-            <div style="position: relative; display: block; border-bottom: 1px solid #ddd; padding-bottom:15px; margin-bottom: 15px; " class="clearfix">
-              <div style="float: left; width: 60px; height: 60px; border-radius: 100px; background-color: red;"></div>
-              <div style="margin-left: 70px; text-align: left;">
-                Sign in with<br>
-                Administrator
-              </div>
-            </div>
-          </li>
-          <li><a><i class="fab fa-accusoft"></i> Customization</a></li>
-          <li><a><i class="fas fa-eye"></i> Audience</a></li>
-          <li><a><i class="fas fa-chalkboard-teacher"></i> Teams</a></li>
-          <li><a><i class="fas fa-globe"></i> Domains</a></li>
-          <li><a><i class="fas fa-chart-line"></i> Integrations</a></li>
-          <li><a><i class="fas fa-bezier-curve"></i> Insights</a></li>
-          <li><a><i class="fas fa-search"></i> Search</a></li>
-          <li><a><i class="fas fa-cog"></i> Advanced</a></li>
-        </ul>
-      </div>
-      <div class="outbutton"><button class="btn btn-primary btn-admin"><i class="fas fa-arrow-left"></i></button></div>
-    </div>
-    <div class="panel-after">
-    </div>
-
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(".admin .panel-after").on("click", function(){
-      $(".admin").toggleClass('show');
-    });
-
-    $(".admin .outbutton").on("click", function(){
-      $(".admin").toggleClass('show');
-    });
 
 
-    $(".btn-admin").on("click", function(){
-      $(".admin").toggleClass('show');
-    });
-  });
-</script>
 </body>
 </html>

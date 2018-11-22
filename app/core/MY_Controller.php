@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+include_once APPPATH."libraries/Format.php";
+include_once APPPATH."libraries/ApiServer.php";
+include_once APPPATH."libraries/ApiClient.php";
 class BaseController extends CI_Controller{
 	public $layout = "home-layout";
 	public $title = "B2B Blockchian Exchange";
@@ -10,7 +12,7 @@ class BaseController extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->library(['session','email','user_agent']);
-		$this->load->helper(['url','form']);
+		$this->load->helper(['url','form','functions']);
 		$this->load->model(['account_model','app_model']);
 		
 	}
@@ -40,7 +42,10 @@ class BaseController extends CI_Controller{
 	*/
 	public function view($layout, $data=[]){
 		
-		$is_login = 1;
+		$is_login = $this->account_model->get_login_id();
+		//$is_admin = $this->app_model->get_admin($is_login);
+		//$is_team = $this->app_model->get_team($is_login);
+
 		$data = array_merge($data,["is_login" => $is_login]);
 		
 		if($this->getLayout()){
@@ -151,13 +156,13 @@ class Apps extends BaseController
 		parent::__construct();
 		$this->load->database();
 		$this->app = $this->app_model->config();
-
+		$this->config->set_item("app",$this->app);
 		$this->set_meta($this->app->name,$this->app->description,$this->app->image);
 	}
 }
 
 
-class ApiController extends BaseController{
+class ApiController extends ApiClient{
 	function __construct()
 	{
 		parent::__construct();
@@ -166,7 +171,7 @@ class ApiController extends BaseController{
 
 
 
-class APIAdminController extends BaseController{
+class APIAdminController extends ApiServer{
 	function __construct()
 	{
 		parent::__construct();

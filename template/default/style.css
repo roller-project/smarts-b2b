@@ -1,22 +1,13 @@
 header{
 	-moz-box-align: stretch;
-
 	background: rgb(255, 255, 255) none repeat scroll 0% 0%;
-
 	border-bottom: 1px solid rgb(212, 218, 223);
-
 	box-shadow: rgba(116, 129, 141, 0.1) 0px 1px 1px 0px;
-
 	z-index: 20;
-
 	display: flex;
-
 	align-items: stretch;
-
 	position: relative;
-
 	flex: 0 1 80px;
-
 	min-height: 80px;
 	background-color: #FFF;
 
@@ -32,160 +23,111 @@ header .navbar-collapse.show{
 	border-right:1px solid #ddd;
 }
 
-.no-mrb{
-	margin-bottom: 0;
-}
-.menu-left{
-	position: -webkit-sticky;
-	position: sticky;
-	top: 4rem;
-	z-index: 1000;
-	height: calc(100vh - 4rem);
-	background-color: #f5f7f9;
-}
-.menu-left .content{
-	max-height: calc(100vh - 5rem);
-	overflow-y: auto;
-	padding-right: 30px;
-}
-.slider{
-	background-image: url(https://i-vnexpress.vnecdn.net/2018/06/30/7-1530344842_1200x0.jpg);
-	height: 350px;
-	background-repeat: no-repeat;
-	background-origin: content-box;
-	background-size: cover;
-}
-footer{
-	position: relative;
-}
-footer{
-	position: fixed;
-	bottom: 0px;
+aside{
+	
+
+	-moz-box-direction: normal;
+	-moz-box-orient: vertical;
 	width: 100%;
-	z-index: 9998;
-	
+	min-height: 100vh;
+	color: rgb(36, 42, 49);
+	background: rgb(245, 247, 249) none repeat scroll 0% 0%;
+	display: flex;
+	flex-direction: column;
+
 
 }
 
-.admin{
-	position: fixed;
-	top:0;
+.main_content{
 	width: 100%;
-	
-	height: 100%;
-	z-index: 9999;
-	display: none;
-	
-}
-.admin.show{
-	display: block;
-	animation: slide-in 0.5s forwards;
-    -webkit-animation: slide-in 0.5s forwards;
-
-}
-.admin .panel{
-	background-color: #3775e0;
-	position: absolute;
-	width: 20%;
-	height: 100%;
-	
-	transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
+	margin: 0px auto;
+	display: flex;
+	flex: 1 1 0%;
+	min-height: 100%;
+	color: rgb(59, 69, 78);
 }
 
-.admin.show .panel {
-    animation: slide-in 0.5s forwards;
-    -webkit-animation: slide-in 0.5s forwards;
-    z-index: 1;
+
+.main{
+	-moz-box-align: stretch;
+	flex: 1 1 0%;
+	display: flex;
+	align-items: stretch;
+	transition: margin-bottom 200ms ease 0s;
 }
 
-.admin .panel {
-    animation: slide-out 0.5s forwards;
-    -webkit-animation: slide-out 0.5s forwards;
-}
-.admin .panel-after{
-	
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	
-	background-color: #FFF;
-	opacity: 0.9;
-}
-.admin .outbutton{
-	position: absolute;
-	bottom: 0px;
-	z-index: 9999;
-	text-align: center;
-	width: 100%;
-	background-color: #416db9;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-@keyframes slide-in {
-    100% { transform: translateX(0%); }
-}
+#leftSlider{
+	-moz-box-align: stretch;
+	-moz-box-direction: normal;
+	-moz-box-orient: vertical;
+	z-index: 15;
+	flex: 0 0 auto;
+	background: rgb(245, 247, 249) none repeat scroll 0% 0%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: calc(50% - 426px);
+	min-width: 298px;
+	padding-left: calc(50% - 724px);
+	border-right: 1px solid rgb(230, 236, 241);
 
-@-webkit-keyframes slide-in {
-    100% { -webkit-transform: translateX(0%); }
 }
-    
-@keyframes slide-out {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-}
-
-@-webkit-keyframes slide-out {
-    0% { -webkit-transform: translateX(0%); }
-    100% { -webkit-transform: translateX(-100%); }
-}
-
-.panel div.menu{
-	text-align: right;
-}
-.panel div.menu > ul{
-	padding: 0;
-	margin:auto;
-	list-style: none;
-	max-width: 250px;
-	margin-right: 0;
-}
-
-.panel div.menu > ul > li a{
-	padding: 5px 8px;
-	display: block;
-	text-align: left;
-	color: #FFF;
-}
-
-#leftSlider .menu{
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-#leftSlider .menu > li a{
-	padding: 7px 8px;
-	display: block;
-}
-
 #leftSlider .content{
-	max-width: 250px;
-	margin:auto; 
-	margin-right: 0;
-}
-#leftSlider .content .header{
-	text-transform: uppercase;
-	color: #444;
+	-moz-box-direction: normal;
+	-moz-box-orient: vertical;
+	margin: 0px;
+	padding: 0px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: rgb(245, 247, 249);
+	overflow: auto;
 }
 
 main{
-	padding-top: 15px;
+	-moz-box-direction: normal;
+	-moz-box-orient: vertical;
+	margin: 0px;
+	padding: 0px 0px 108px;
+	flex: 1 1 auto;
+	min-width: 0px;
+	display: flex;
+	flex-direction: column;
+	background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+	max-width: 100%;
 }
-main .header{
-	border-left:2px solid green;
-	padding-left: 15px;
+main .dashboard{
+	flex: 1 1 auto;
+	min-width: 0px;
+	display: flex;
+	position: relative;
+	padding-top: 30px;
+}
+main .dashboard > .content{
+	display: block;
+	padding: 0px;
+	flex: 1 1 auto;
+	min-width: 0px;
+	max-width: 750px;
+	margin: 0px 50px;
+
 }
 
+main .dashboard > #rightSlider{
+	display: block;
+	margin: 0px auto 0px 0px;
+	padding: 0px;
+	position: relative;
+	flex: 0 0 auto;
+	width: 224px;
+}
+
+footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	z-index: 99;
+}
 
 @media(min-width: 1650px){
 	.container{
