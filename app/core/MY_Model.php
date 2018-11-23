@@ -28,7 +28,7 @@ class DB_Model extends CI_Model
 		if(is_array($login) && isset($login["is_login"]) && intval($login["is_login"]) > 0){
 			return intval($login["is_login"]);
 		}else{
-			return 0;
+			return 1;
 		}
 	}
 

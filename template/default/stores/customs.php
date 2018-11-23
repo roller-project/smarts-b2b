@@ -1,4 +1,4 @@
-<?php echo form_open("/admin/customs_save");?>
+<?php echo form_open("/settings/customs_save");?>
 <div class="title">
   <h4><?php echo lang("customization");?>
     <div class="float-right">
@@ -29,14 +29,14 @@
 <div class="card mb-30">
   <div class="card-body">
     
-    <label>Title</label>
+    <label><?php echo lang("title");?></label>
     <input type="text" class="form-control" name="">
 
-    <label>Description</label>
+    <label><?php echo lang("description");?></label>
     <textarea type="text" class="form-control" name=""></textarea>
 
 
-    <label>Keyword</label>
+    <label><?php echo lang("keyword");?></label>
     <textarea type="text" class="form-control" name=""></textarea>
 
   </div>

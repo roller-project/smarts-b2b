@@ -38,7 +38,9 @@ class BaseController extends CI_Controller{
 		if($img) $this->image = $img;
 	}
 
-
+	public function setLayout($layout){
+		$this->layout = $layout;
+	}
 	/*
 	Get Layout 
 	*/
@@ -145,7 +147,14 @@ class BaseController extends CI_Controller{
 	}
 
 
-	
+	public function go($url=""){
+		redirect(site_url($url));
+		exit();
+	}
+
+	public function error404(){
+		$this->view("errors/404");
+	}
 
 }
 
@@ -155,6 +164,21 @@ class AdminController extends BaseController{
 	{
 		parent::__construct();
 		$this->load->database();
+		define('ADMIN', true);
+		$this->app = $this->app_model->config();
+		$this->config->set_item("app",$this->app);
+		$this->set_meta($this->app->name,$this->app->description,$this->app->image);
+
+		$this->app->admin = false;
+
+		if($this->app->app_author == $this->account_model->get_login_id()){
+			$this->app->admin = true;
+		}
+
+		if($this->app->admin === false){
+			$this->go("/404.html");
+			exit();
+		}
 	}
 }
 
@@ -171,6 +195,13 @@ class Apps extends BaseController
 		$this->app = $this->app_model->config();
 		$this->config->set_item("app",$this->app);
 		$this->set_meta($this->app->name,$this->app->description,$this->app->image);
+		
+		$this->app->admin = false;
+		$this->app->mode = 'view';
+		
+		if($this->app->app_author == $this->account_model->get_login_id()){
+			$this->app->admin = true;
+		}
 	}
 }
 

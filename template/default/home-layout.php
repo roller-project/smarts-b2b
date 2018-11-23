@@ -89,40 +89,16 @@
         </div>
     </header>
 
-    
-    <aside>
-      <div class="main_content">
-        <div class="main">
+<?php 
+if(defined("ADMIN")){
+  include __DIR__."/admin.php";
+}else{
+  include __DIR__."/home.php";
+}
+?>
+   
 
-            <div id="leftSlider" class="hidden-md-down" style="padding-right: 0;">
-                <div class="content">
-                    <ul class="menu">
-                      <li>Cras justo odio</li>
-                      <li>Dapibus ac facilisis in</li>
-                      <li>Morbi leo risus</li>
-                      <li>Porta ac consectetur ac</li>
-                      <li>Vestibulum at eros</li>
-                    </ul>
-                </div>
-            </div>
-            <main>
-                
-                <div class="dashboard">
-                    <div class="content">
-                      <?php print_r($content)?>
-                    </div>
-
-                    <div id="rightSlider" class="hidden-md-down">
-                      Con voi
-                    </div>
-                </div>
-            </main>
-            
-        </div>
-      </div>
-    </aside>
-
-<?php if($is_login == getItems("app.app_author")){ ?>
+<?php if($this->app->admin !== false){ ?>
   <link rel="stylesheet" href="<?php echo site_url("template/default/admin.css");?>" crossorigin="anonymous">
     <footer>
       <div class="container-fluid">
@@ -141,7 +117,11 @@
     <div class="admin"></div>
     <script type="text/javascript">
       $(document).ready(function(){
-        $(".admin").load("/admin");
+        $(".admin").load("/settings", function(){
+          $(".outbutton").on("click", function(){
+            $(".admin").toggleClass('show');
+          });
+        });
       });
     </script>
 <?php } ?>
