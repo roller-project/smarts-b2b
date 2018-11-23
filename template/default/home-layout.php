@@ -123,6 +123,7 @@
     </aside>
 
 <?php if($is_login == getItems("app.app_author")){ ?>
+  <link rel="stylesheet" href="<?php echo site_url("template/default/admin.css");?>" crossorigin="anonymous">
     <footer>
       <div class="container-fluid">
         <div class="row">

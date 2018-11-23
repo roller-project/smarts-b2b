@@ -8,15 +8,28 @@ class BaseController extends CI_Controller{
 	public $title = "B2B Blockchian Exchange";
 	public $description = "";
 	public $image = "";
+	public $language = "vietnam";
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->library(['session','email','user_agent']);
-		$this->load->helper(['url','form','functions']);
+		$this->load->helper(['url','form','functions','language']);
 		$this->load->model(['account_model','app_model']);
+
+		/*
+		Default Language
+		*/
+		
+		if($this->session->has_userdata("language")){
+			$this->language = $this->session->userdata("language");
+		}
+        $this->get_lang('global');	
 		
 	}
 
+	public function get_lang($lang=""){
+		$this->lang->load($lang,$this->language, false, false);
+	}
 
 
 	public function set_meta($title, $des="", $img=""){

@@ -102,6 +102,7 @@ main .dashboard{
 	display: flex;
 	position: relative;
 	padding-top: 30px;
+	
 }
 main .dashboard > .content{
 	display: block;
@@ -127,6 +128,13 @@ footer{
 	position: fixed;
 	bottom: 0;
 	z-index: 99;
+}
+
+
+.upload{
+	border:1px dotted #ddd;
+	min-height: 60px;
+	width: 100%;
 }
 
 @media(min-width: 1650px){

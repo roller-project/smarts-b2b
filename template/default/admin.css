@@ -1,0 +1,160 @@
+/*
+Admin
+*/
+.admin{
+	width: 100%;
+	left: -100%;
+	display: none;
+}
+.admin.show{
+	-moz-box-align: center;
+
+	-moz-box-pack: center;
+	margin: 0px;
+	padding: 0px;
+	pointer-events: auto;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	animation-timing-function: ease-out;
+	animation-duration: 0.2s;
+	transition: background-color 0.2s ease-out 0s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(24, 48, 85, 0.3);
+	animation-name: keyframe_5fxlba;
+	z-index: 99;
+}
+
+.admin .panel{
+	display: block;
+	margin: 0px;
+	padding: 0px 0px 0px calc(50% - 748px);
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	max-height: 100%;
+	width: calc(50% - 426px);
+	min-width: 298px;
+	z-index: 23;
+	
+}
+.admin .control{
+	margin: 0px;
+	padding: 0px 0px 92px;
+	padding-bottom: 92px;
+	padding-left: 0px;
+	display: flex;
+	min-width: 298px;
+	background: rgb(56, 132, 255) none repeat scroll 0% 0%;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	max-height: 100%;
+	z-index: 24;
+	pointer-events: auto;
+	transition-property: -ms-transform, transform, transform, opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-out;
+	opacity: 1;
+	transform: translateX(0%);
+
+}
+
+.admin .panel div.menu > ul{
+	padding: 0;
+	margin:auto;
+	list-style: none;
+	max-width: 250px;
+	margin-right: 0;
+}
+
+.admin .panel div.menu > ul > li a{
+	padding: 5px 8px;
+	display: block;
+	text-align: left;
+	color: #FFF;
+}
+.admin .panel div.menu > ul > li.active{
+	border-left:1px solid #ddd;
+}
+.admin .outbutton{
+	position: fixed;
+	z-index: 26;
+	bottom: 0;
+	padding: 10px;
+}
+.admin .panel-after{
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	pointer-events: auto;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	width: 926px;
+	max-width: calc(-298px + 100vw);
+	background: rgb(245, 247, 249) none repeat scroll 0% 0%;
+	overflow: auto;
+	opacity: 1;
+	transform: translateX(0%);
+	transition: -ms-transform 0.2s ease-out 0s, transform 0.2s ease-out 0s, transform 0.2s ease-out 0s, opacity 0.2s steps(1, start) 0s;
+	left: 100%;
+	padding: 50px;
+	background-color:rgb(245, 247, 249); 
+
+}
+.admin .panel-after.show{
+	display: block;
+}
+.admin .panel-after .content{
+	-moz-box-direction: normal;
+	-moz-box-orient: vertical;
+	margin: 0px;
+	flex: 1 1 0%;
+	padding: 32px 16px;
+	border-left: medium none;
+	overflow: hidden;
+	flex-direction: column;
+	display: flex;
+
+}
+
+.admin .shadown{
+	-webkit-box-shadow: 0px 0px 3px 2px rgba(219,219,219,1);
+	-moz-box-shadow: 0px 0px 3px 2px rgba(219,219,219,1);
+	box-shadow: 0px 0px 3px 2px rgba(219,219,219,1);
+	padding: 20px;
+
+}
+.admin .mb-30{
+	margin-bottom: 30px;
+}
+.admin .description{
+	color: #666;
+}
+
+@keyframes keyframe_5fxlba{
+	0% {
+
+	    background-color: rgba(24, 48, 85, 0);
+
+	}
+	100% {
+
+	    background-color: rgba(24, 48, 85, 0.3);
+
+	}
+}
+@media(min-width: 1050px){
+	.admin .control{
+		width: calc(50% - 426px);
+		min-width: 298px;
+		padding-left: calc(50% - 724px);
+	}
+}
