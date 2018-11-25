@@ -1,4 +1,4 @@
-
+<script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo site_url("resource/js/upload.js");?>"></script>
 <div class="control">
       
     

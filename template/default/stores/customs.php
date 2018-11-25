@@ -14,14 +14,27 @@
 <div class="card mb-30">
   <div class="card-body">
     
-    <div style="width: 65px; height: 65px; display: inline-flex;" class="border">
+    <div style="width: 65px; height: 65px; float: left;" class="border ilogo">
       Logo
     </div>
-    <div style="margin-left: 70px; display: inline-flex;">
-      <div class="dropdownlogo upload"></div>
+    <div style="margin-left: 70px;">
+      <div class="dropdownlogo upload">
+        <input type="file" name="filename" id="uploadlogo">
+      </div>
     </div>
   </div>
-
+  
+</div>
+<h4>Brand Banner</h4>
+<div class="card mb-30">
+  <div class="card-body">
+    
+   
+  
+  <div>
+    <div class="dropdownlogo upload"></div>
+  </div>
+</div>
 </div>
 
 
@@ -45,3 +58,14 @@
 
 <button class="btn btn-lg btn-info" type="submit"><i class="fas fa-save"></i> <?php echo lang("save");?></button>
 <?php echo form_close();?>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $("#uploadlogo").AjaxFileUpload({
+        action : "/upload/image",
+        onComplete: function(name, response) {
+          console.log(name);
+          $(".ilogo").html("<img src='"+response.name+"' class='w-100'/>");
+        }
+      });
+    });
+  </script>
