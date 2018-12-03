@@ -41,6 +41,7 @@
  <link rel="stylesheet" href="<?php echo site_url("template/default/style.css");?>" crossorigin="anonymous">
 </head>
 <body>
+<?php echo notesServices();?>
     <header>
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light w-100">
@@ -93,8 +94,17 @@
 if(defined("ADMIN")){
   include __DIR__."/admin.php";
 }else{
-  include __DIR__."/home.php";
+
+  /*
+  Client Layout
+  */
+  if(is_stores()){
+    include __DIR__."/stores.php";
+  }else{
+    include __DIR__."/home.php";
+  }
 }
+
 ?>
    
 
@@ -106,11 +116,20 @@ if(defined("ADMIN")){
           <div class="col-lg-1">
             <button class="btn btn-lg btn-primary btn-block btn-admin"><i class="fas fa-sliders-h"></i></button>
           </div>
-          <div class="col-lg-11">
+          <div class="col-lg-<?php echo ($this->app->mode == "edit" ? "9" : "11");?>">
             <div class="alert alert-primary" role="alert">
               A simple primary alert—check it out!
+
             </div>
           </div>
+          <?php if($this->app->mode == "edit"){ ?>
+            <div class="col-lg-2">
+              <?php echo form_open("/admin/post",["target" => "savepost"]);?>
+              <button class="btn btn-lg btn-primary btn-block">Update</button>
+              <?php echo form_close();?>
+            </div>
+          <?php } ?>
+          <iframe src="#" id="savepost" name="savepost" style="margin-top: -5000px; height: 1px;"></iframe>
         </div>
       </div>
     </footer>
@@ -122,8 +141,85 @@ if(defined("ADMIN")){
             $(".admin").toggleClass('show');
           });
         });
+
+
+        $('#editMenuModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id') // Extract info from data-* attributes
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var name = button.data('name')
+          var url = button.data('url')
+          var action = button.data('action')
+          var modal = $(this)
+          modal.find('.modal-body form').attr("action",action)
+          modal.find('.modal-title').text('Edit Menu' + name)
+          modal.find('.modal-body input#title-name').val(name)
+          modal.find('.modal-body input#url-name').val(url)
+          modal.find('.modal-body input#target-name').val(url)
+         
+        });
+
+        $("[data-href]").on("click", function(){
+          window.location.href = $(this).attr("data-href")+"?ref=<?php echo uri_string();?>";
+        });
+
+        $('#editMenuModal form').submit(function(){
+          var data = $(this).serialize();
+          var name = $(this).find("input#title-name").val();
+          var url = $(this).find("input#url-name").val();
+          var target = $(this).find("input#target-name").val();
+          var action = $(this).attr("action")
+         
+
+          $.ajax({
+                    url:action, 
+                    type:"POST", 
+                    data:data,
+                    success: function(response){
+                        $("[data-target='"+target+"']").html(name);
+                        $("[data-target='"+target+"']").attr("href",url);
+                        $('#editMenuModal').modal('hide');
+                    }, 
+                  });
+          return false;
+        });
+
       });
     </script>
+
+
+<div tabindex="-1" role="dialog" class="modal fade" id="editMenuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <?php echo form_open();?>
+          <div class="form-group">
+            <label for="title-name" class="col-form-label">Name:</label>
+            <input type="text" name="name" class="form-control" id="title-name">
+          </div>
+
+          <div class="form-group">
+            <label for="url-name" class="col-form-label">URL:</label>
+            <input type="text" name="url" class="form-control" id="url-name">
+          </div>
+          <input type="hidden" class="form-control" id="target-name">
+          <?php echo form_close();?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="$('#editMenuModal form').submit()">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php } ?>
 
 

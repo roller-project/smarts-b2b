@@ -156,6 +156,15 @@ class BaseController extends CI_Controller{
 		$this->view("errors/404");
 	}
 
+
+
+	/*
+	Swap Layout data
+	*/
+
+	public function swapLayout(){
+		
+	}
 }
 
 
@@ -199,6 +208,11 @@ class Apps extends BaseController
 		$this->app->admin = false;
 		$this->app->mode = 'view';
 		
+		if($this->session->userdata("mode") == "edit"){
+			$this->app->mode = "edit";
+		}
+
+
 		if($this->app->app_author == $this->account_model->get_login_id()){
 			$this->app->admin = true;
 		}

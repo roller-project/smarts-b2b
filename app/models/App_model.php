@@ -21,6 +21,7 @@ class App_model extends DB_Model{
 				"image"	=>	"",
 				"keyword"	=>	"",
 				"app_author" => -1,
+				"app_id" => 0,
 
 			];
 
@@ -36,9 +37,18 @@ class App_model extends DB_Model{
 				"image"	=>	"",
 				"keyword"	=>	"",
 				"app_author" => $data->app_author,
+				"app_id" => $data->app_id,
 
 			];
 
+			/*
+			read Menu By App
+			*/
+
+			
+			$arv["menu"] = $this->apps_menu($data->app_id);
+
+			
 
 			$data->app_config = json_encode($this->magre_data($arv,($data->app_config ? $data->app_config : '{}')));
 
@@ -47,7 +57,31 @@ class App_model extends DB_Model{
 		return json_decode($data->app_config);
 	}
 
+	public function apps_menu($app_id, $parent_id=0){
+		$this->db->where("app_id", $app_id);
+		$this->db->where("parent_id", $parent_id);
 
+		$menu = $this->db->get("apps_menu")->result();
+
+		if(count($menu) == 0) return false;
+		
+		$arv = [];
+
+		foreach ($menu as $key => $value) {
+			$menu_child_rows = $this->db->get_where("apps_menu",["app_id" => $app_id, "parent_id" => $value->menu_id])->num_rows();
+			
+			$arv[$value->menu_type][] = [
+				"name" => $value->menu_name, 
+				"url" => $value->menu_url,
+				"icon" =>  $value->menu_icon,
+				"menu_id" => $value->menu_id, 
+				"child" => ($menu_child_rows > 0 ? $this->apps_menu($app_id, $value->menu_id) : [])
+			];
+			
+		}
+		return $arv;
+
+	}
 
 	public function getDomainApps(){
 		return str_replace(['http://', 'https://','www.','/'],'',site_url());

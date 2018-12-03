@@ -12,7 +12,7 @@ class Upload extends AdminController {
 		}
 	}
 
-	public function image(){
+	public function image($resize=false, $crop=false){
 
 		$config['upload_path'] = FCPATH.'uploads/'.$this->app->app_author.'/'.$this->app_model->getDomainApps().'/';
 
@@ -63,7 +63,7 @@ class Upload extends AdminController {
 			raw_name: "b236758c93e18620c064fb8440c5e8ce"
         	*/
             $data = $this->upload->data();
-            echo json_encode(array("name" => str_replace(FCPATH,'', $data["full_path"]), "error" => false));
+            echo json_encode(array("name" => site_url(str_replace(FCPATH,'', $data["full_path"])), "error" => false));
             exit();
         }
 		echo json_encode(array(
