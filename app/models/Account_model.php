@@ -27,6 +27,47 @@ class Account_model extends DB_Model{
 		}
 	}
 
+
+	public function login($email, $password){
+		$email = strtolower(str_replace([' '], '', $email));
+		$password = sha1(strtolower(str_replace([' '], '', $password)));
+		$this->db->where("email",$email);
+		$this->db->where("password",$password);
+		$this->db->where("is_active",1);
+		$data = $this->db->get("account")->row();
+		if($data){
+			$this->session->set_userdata("login",["is_login" => $data->id, "email" => $email]);
+			return true;
+		}
+		return false;
+	}
+
+	public function register($email, $password){
+		$email = strtolower(str_replace([' '], '', $email));
+		$password = sha1(strtolower(str_replace([' '], '', $password)));
+		/*
+		Validate
+		*/
+		$this->db->where("email",$email);
+		$data = $this->db->get("account")->row();
+		if(!$data){
+			
+			$arv = [
+				"email" => $email,
+				"password" => $password,
+				"is_active" => 1
+			];
+
+			$this->db->insert("account", $arv);
+			return true;
+		}
+
+		return false;
+
+	}
+
+
+
 	public function getInfo(){
 		
 		$this->db->where("id",$this->get_login_id());

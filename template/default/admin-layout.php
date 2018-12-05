@@ -50,7 +50,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
 
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="#">
                     <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
                     <?php echo getItems("app.name");?>
                 </a>
@@ -98,19 +98,7 @@
     </header>
 
 <?php 
-if(defined("ADMIN")){
-  include __DIR__."/admin.php";
-}else{
-
-  /*
-  Client Layout
-  */
-  if(is_stores()){
-    include __DIR__."/stores.php";
-  }else{
-    include __DIR__."/home.php";
-  }
-}
+include __DIR__."/admin.php";
 
 ?>
    

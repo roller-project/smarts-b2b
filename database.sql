@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2018 at 01:22 AM
+-- Generation Time: Dec 05, 2018 at 12:49 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -33,7 +33,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `email`, `password`, `is_active`, `created`) VALUES
-(1, 'thietkewebvip@gmail.com', '', 0, '2018-11-22 13:22:33');
+(3, 'thietkewebvip@gmail.com', 'a131b831377a7ecb892750b1c2d118aaeca47647', 1, '2018-12-03 23:08:32');
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,8 @@ CREATE TABLE `apps` (
 --
 
 INSERT INTO `apps` (`app_id`, `app_name`, `app_domain`, `app_url`, `app_author`, `app_config`, `app_created`) VALUES
-(1, 'Demo Apps', 'localhost', '', 1, '', '2018-11-22 13:23:17');
+(2, 'Demo Apps', 'develop.com', 'demo-apps', 3, '', '2018-12-04 00:46:48'),
+(3, 'Sell Off', 'anhkhoa.com', 'sell-off', 3, '', '2018-12-04 11:26:21');
 
 -- --------------------------------------------------------
 
@@ -80,9 +81,7 @@ CREATE TABLE `apps_menu` (
 --
 
 INSERT INTO `apps_menu` (`menu_id`, `app_id`, `menu_name`, `menu_url`, `menu_icon`, `parent_id`, `menu_sort`, `menu_type`) VALUES
-(19, 1, 'Menu Vip 10', 'create-menu', '', 0, 0, 'slider'),
-(20, 1, 'Menu Vip 1', 'create-menu-1543785256', '', 0, 0, 'slider'),
-(21, 1, 'Test Menu', 'create-menu-1543785262', '', 20, 0, 'slider');
+(22, 2, 'Room Data', 'room-data', '', 0, 0, 'slider');
 
 -- --------------------------------------------------------
 
@@ -101,6 +100,30 @@ CREATE TABLE `contents` (
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plance`
+--
+
+CREATE TABLE `plance` (
+  `plance_id` int(10) NOT NULL,
+  `account_id` bigint(20) NOT NULL,
+  `root_account_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `limit_apps` int(10) NOT NULL,
+  `limit_hdd` int(10) NOT NULL,
+  `limit_bandwith` int(10) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `plance`
+--
+
+INSERT INTO `plance` (`plance_id`, `account_id`, `root_account_email`, `limit_apps`, `limit_hdd`, `limit_bandwith`, `created`, `name`) VALUES
+(1, 3, '', 1, 1, 1, '2018-12-03 23:44:11', 'Fee Trader');
 
 -- --------------------------------------------------------
 
@@ -153,6 +176,13 @@ ALTER TABLE `contents`
   ADD KEY `menu_url` (`menu_url`);
 
 --
+-- Indexes for table `plance`
+--
+ALTER TABLE `plance`
+  ADD PRIMARY KEY (`plance_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
@@ -168,22 +198,27 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `apps`
 --
 ALTER TABLE `apps`
-  MODIFY `app_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `app_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `apps_menu`
 --
 ALTER TABLE `apps_menu`
-  MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `contents`
 --
 ALTER TABLE `contents`
   MODIFY `text_id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `plance`
+--
+ALTER TABLE `plance`
+  MODIFY `plance_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `team`
 --
@@ -212,6 +247,12 @@ ALTER TABLE `contents`
   ADD CONSTRAINT `contents_ibfk_1` FOREIGN KEY (`app_id`) REFERENCES `apps` (`app_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contents_ibfk_2` FOREIGN KEY (`team_group_id`) REFERENCES `team` (`team_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contents_ibfk_3` FOREIGN KEY (`menu_url`) REFERENCES `apps_menu` (`menu_url`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `plance`
+--
+ALTER TABLE `plance`
+  ADD CONSTRAINT `plance_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `team`

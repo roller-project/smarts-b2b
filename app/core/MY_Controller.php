@@ -24,7 +24,7 @@ class BaseController extends CI_Controller{
 			$this->language = $this->session->userdata("language");
 		}
         $this->get_lang('global');	
-		
+		$this->smtp_email_setup();
 	}
 
 	public function get_lang($lang=""){
@@ -60,7 +60,7 @@ class BaseController extends CI_Controller{
 		$is_login = $this->account_model->get_login_id();
 		//$is_admin = $this->app_model->get_admin($is_login);
 		//$is_team = $this->app_model->get_team($is_login);
-		$is_login = 1;
+		//$is_login = 1;
 		$data = array_merge($data,["is_login" => $is_login]);
 		
 		if($this->getLayout()){
@@ -165,15 +165,88 @@ class BaseController extends CI_Controller{
 	public function swapLayout(){
 		
 	}
+
+
+
+	public function recaptcha(){
+		return '<div class="form-group"><div class="g-recaptcha" data-sitekey="'.$this->config->item("recaptcha_key").'"></div></div>';
+	}
+
+	public function validate_captcha(){
+		if(!$this->config->item("recaptcha_key")) return true;
+		//cấu hình thông tin do google cung cấp
+		$api_url     = 'https://www.google.com/recaptcha/api/siteverify';
+		$site_key    = $this->config->item("recaptcha_key");
+		$secret_key  = $this->config->item("captcha_secret_key");
+		  
+		//lấy dữ liệu được post lên
+	    $site_key_post    = $this->input->post('g-recaptcha-response');
+	    if(!$site_key_post) return false;
+
+	    
+	    $remoteip = $this->input->ip_address();
+	    //tạo link kết nối
+	    $api_url = $api_url.'?secret='.$secret_key.'&response='.$site_key_post.'&remoteip='.$remoteip;
+	    //lấy kết quả trả về từ google
+	    $response = file_get_contents($api_url);
+	    //dữ liệu trả về dạng json
+	    $response = json_decode($response);
+	    if(!isset($response->success))
+	    {
+	        return false;
+	    }
+	    if($response->success == true)
+	    {
+	        return true;
+	    }else{
+	       return false;
+	    }
+	}
+
+
+	public function smtp_email_setup(){
+
+		$smtp_email = array(
+			'protocol'  => 'smtp',
+			'smtp_host' => 'email-smtp.eu-west-1.amazonaws.com',
+			//'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 587,
+			'smtp_user' => 'AKIAIQLJQ535QN4ZU2GQ',
+			'smtp_pass' => 'Av6NKIXBkdxdk4f/PxBcNSEnEN34Kahwjk4AJq/dW1NX',
+			'smtp_user' => 'support@smarts.exchange',
+			'smtp_pass' => 'anhkhoa@321',
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'smtp_crypto' => 'tls', // tls or ssl
+			'smtp_from' => 'support@smarts.exchange' // tls or ssl
+		);
+
+
+		$this->email->initialize($smtp_email);
+		$this->email->from($smtp_email["smtp_from"], $smtp_email["smtp_from"]);
+		$this->email->set_newline("\r\n");
+	}
+
+	public function sendEmail($toEmail, $subject, $body, $body_text='', $mailtype="html"){
+		$body = $this->load->view("email", ["content" => $body], true);
+		$this->email->to($toEmail);
+		$this->email->subject($subject);
+		$this->email->message($body);
+		$this->email->set_alt_message($body_text);
+		$this->email->set_mailtype($mailtype);
+
+		return $this->email->send();
+	}
 }
 
 
 class AdminController extends BaseController{
 	function __construct()
 	{
+		define('ADMIN', true);
 		parent::__construct();
 		$this->load->database();
-		define('ADMIN', true);
+		
 		$this->app = $this->app_model->config();
 		$this->config->set_item("app",$this->app);
 		$this->set_meta($this->app->name,$this->app->description,$this->app->image);

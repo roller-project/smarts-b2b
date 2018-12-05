@@ -15,6 +15,7 @@ class Admin extends AdminController {
 
 	public function index(){
 		print_r($this->account_model->get_login_id());
+		
 		$this->view("admin/stores");
 	}
 

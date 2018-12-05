@@ -6,12 +6,29 @@
         <div id="leftSlider" class="hidden-md-down" style="padding-right: 0;">
             <div class="content">
                 <ul class="menuadmin">
+                  
                   <li>
                     <div class="apps-item">
-                      <i class="fas fa-plus fa-2x"></i> Create Plan
+                      <a href="/stores/createapps"><i class="fas fa-plus fa-1x"></i> Create Apps</a>
                     </div>
                   </li>
                   
+
+                  <li>
+                    <div class="apps-item">
+                      <a href="/stores/createapps"><i class="fas fa-conf fa-1x"></i> Settings</a>
+                    </div>
+                  </li>
+
+
+
+                  <li>
+                    <div class="apps-item">
+                      <a href="/stores/createapps"><i class="fas fa-plus fa-1x"></i> ADS</a>
+                    </div>
+                  </li>
+
+
                 </ul>
             </div>
         </div>
