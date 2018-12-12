@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'dashboard';
 $route['login.html'] = 'dashboard/login';
 $route['register.html'] = 'dashboard/register';
+$route['logout.html'] = 'dashboard/logout';
 
 
 $route['catalog/(:any)'] = 'catalog/post/$1';

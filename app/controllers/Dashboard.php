@@ -47,4 +47,9 @@ class Dashboard extends Apps {
 		$this->view("account/register");
 	}
 
+
+	public function logout(){
+		$this->session->sess_destroy();
+		$this->go("/");
+	}
 }

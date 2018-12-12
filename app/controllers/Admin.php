@@ -28,15 +28,28 @@ class Admin extends AdminController {
 		$this->go($url);
 	}
 
+	public function mode_view(){
+		if($this->isGet()){
+			return false;
+		}
+		$this->session->set_userdata("mode","view");
+		$url = $this->input->post("current_url");
+		$this->go($url);
+	}
+
 	public function menucontroller($type="", $parent=0, $json=true){
+
 		$arv = [
 			"app_id" => $this->app->app_id,
 			"menu_name" => "Create Menu",
 			"menu_type" => $type,
 			'parent_id' => $parent,
+			'language' => config_item("language"),
 			"menu_url" => $this->rewrite_url("Create Menu"),
 		];
+
 		$this->db->insert("apps_menu", $arv);
+
 		if($json){
 			print_r($arv);
 		}

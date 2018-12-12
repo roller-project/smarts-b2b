@@ -35,6 +35,16 @@ function is_stores(){
 	return false;
 }
 
+function render_menu_header($type){
+	$type = ($type == "slider" ? "slider" : "header");
+	$ci = &get_instance();
+	if(!isset($ci->app->menu->{$type})) return [];
+	$arv = [];
+	$menu = $ci->app->menu->{$type};
+	$options = ""; 
+	foreach($menu as $key => $value){
+	}
+}
 
 function render_menu($type){
 	$type = ($type == "slider" ? "slider" : "header");
@@ -44,7 +54,7 @@ function render_menu($type){
 	$menu = $ci->app->menu->{$type};
 	$options = ""; 
 	foreach($menu as $key => $value){
-		$icoin = ($value->icon ? '<i class="'.$value->icon.'"></i> ' : "");
+		$icoin = '<i class="'.($value->icon ? $value->icon : "fa fa-chevron-right").'"></i> ';
 		$child = "";
 		if(isset($value->child->{$type})){
 			$child = implode(render_child($value->child->{$type}, $type), "\n");
@@ -79,4 +89,88 @@ function render_child($obj, $type){
 function notesServices(){
 	
 }
+
+
+/*
+	Editer Helper
+*/
+
+	function editer_setup($plugins=[]){
+		$arv = [];
+		$arv[] = '<script src="'.site_url("resource/editer/js/froala_editor.min.js").'"></script>';
+		$arv[] = '<script src="'.site_url("resource/editer/js/froala_editor.pkgd.min.js").'"></script>';
+		$arv[] = '<link href="'.site_url("resource/editer/css/froala_editor.min.css").'" rel="stylesheet"/>';
+		$arv[] = '<link href="'.site_url("resource/editer/css/froala_editor.pkgd.min.css").'" rel="stylesheet"/>';
+		$arv[] = '<link href="'.site_url("resource/editer/css/froala_style.min.css").'" rel="stylesheet"/>';
+		
+		foreach ($plugins as $key => $value) {
+			$arv[] = '<script src="'.site_url("resource/editer/js/plugins/".$value.".min.js").'"></script>';
+			$arv[] = '<link href="'.site_url("resource/editer/css/plugins/".$value.".min.css").'" rel="stylesheet"/>';
+		}
+		return implode($arv, "\n");
+	}
+
+	function editer($target=[]){
+		$arv = [];
+		$arv[] = '<script type="text/javascript">';
+		$arv[] = 'jQuery(document).ready(function(){';
+		$arv[] = '
+		$.FroalaEditor.DefineIcon("buttonIcon", { NAME: "star"});
+		$.FroalaEditor.RegisterQuickInsertButton("myButton", {
+					      
+					      icon: "buttonIcon",
+					      title: "My Button",
+					 
+					      
+					      callback: function () {
+					        
+					        this.html.insert("<h4>Title Document</h4><p>Text Description</p>");
+					      },
+					 
+					   
+					      undo: true
+					    });
+
+		
+
+					    ';
+
+		foreach ($target as $key => $value) {
+			$arv[] = '
+			$("'.$value.'").froalaEditor({
+				toolbarInline: true,
+				charCounterCount: false,
+				quickInsertButtons: ["image", "video", "table", "ol", "ul", "myButton"],
+				pluginsEnabled: ["quickInsert", "image", "table", "lists","video"],
+				
+        		imageUploadURL: "/upload/image",
+        		imageUploadParam: "filename",
+				imageStyles: {
+					        "w-100": "w-100",
+					        class2: "w-50"
+					      },
+
+				imageEditButtons: ["imageReplace", "imageAlign", "imageRemove", "|", "imageLink", "linkOpen", "linkEdit", "linkRemove", "-", "imageDisplay", "imageStyle", "imageAlt", "imageSize"]
+
+			});
+			$("'.$value.'").on("click", function(e){
+				e.preventDefault();
+				if (!$("'.$value.'").data("froala.editor")) {
+			      $("'.$value.'").froalaEditor({
+						toolbarInline: true,
+						charCounterCount: false,
+						
+						pluginsEnabled: ["quickInsert", "image", "table", "lists"]
+					});
+			    }
+			});
+			';
+		}
+		//$arv[] = '$(".fr-wrapper div:first-child a").remove();';
+		$arv[] = '});';
+
+		$arv[] = '</script>';
+		return implode($arv, "\n");
+	}
+
 ?>

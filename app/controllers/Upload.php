@@ -63,8 +63,11 @@ class Upload extends AdminController {
 			raw_name: "b236758c93e18620c064fb8440c5e8ce"
         	*/
             $data = $this->upload->data();
-            echo json_encode(array("name" => site_url(str_replace(FCPATH,'', $data["full_path"])), "error" => false));
-            exit();
+            $response = new StdClass;
+	        $response->link = site_url(str_replace(FCPATH,'', $data["full_path"]));
+	        echo stripslashes(json_encode($response));
+        	exit();
+           
         }
 		echo json_encode(array(
 			'name'  => "",

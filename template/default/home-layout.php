@@ -39,6 +39,25 @@
  <link rel="stylesheet" href="<?php echo site_url("resource/icons/css/all.css");?>" crossorigin="anonymous">
 
  <link rel="stylesheet" href="<?php echo site_url("template/default/style.css");?>" crossorigin="anonymous">
+ <script type="text/javascript">
+   var animateUp = function(){
+      $(".alertsave").addClass("fadeOutUp");
+
+   };
+   var ajaxSave = function(url, data){
+
+      $.ajax({
+        url:url, 
+        type:"POST", 
+        data:data,
+        success: function(response){
+           $(".alertsave").remove();
+           $("body").append('<div class="alert alert-success alertsave animated"><i class=""></i> Save <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+           setTimeout(animateUp, 2000);
+        }, 
+      });
+   };
+ </script>
 </head>
 <body>
 <?php echo notesServices();?>
@@ -59,6 +78,7 @@
 
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                  <?php render_menu_header("header");?>
                   <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                   </li>
@@ -86,7 +106,8 @@
                 </form>
                 <div class="form-inline my-2 my-lg-0" style="margin-left: 10px;">
                   <?php if($is_login > 0){ ?>
-                    <a class="btn btn-outline-primary" href="/stores">Settings</a>
+                    <a class="btn btn-outline-primary" href="/stores">Settings</a> &nbsp;
+                    <a class="btn btn-outline-primary" href="/logout.html">Logout</a>
                   <?php }else { ?>
                     <a class="btn btn-outline-primary" href="/login.html">Signin</a> &nbsp; <a class="btn btn-primary" href="/register.html">Sign up</a>
                   <?php } ?>
@@ -116,6 +137,7 @@ if(defined("ADMIN")){
    
 
 <?php if($this->app->admin !== false){ ?>
+  
   <link rel="stylesheet" href="<?php echo site_url("template/default/admin.css");?>" crossorigin="anonymous">
     <footer>
       <div class="container-fluid">
@@ -123,16 +145,22 @@ if(defined("ADMIN")){
           <div class="col-lg-1">
             <button class="btn btn-lg btn-primary btn-block btn-admin"><i class="fas fa-sliders-h"></i></button>
           </div>
-          <div class="col-lg-<?php echo ($this->app->mode == "edit" ? "9" : "11");?>">
-            <div class="alert alert-primary" role="alert">
+          <div class="col-lg-<?php echo ($this->app->mode == "edit" ? "7" : "11");?>">
+            <div class="alert alert-primary alertTest" role="alert">
               A simple primary alert—check it out!
 
             </div>
           </div>
           <?php if($this->app->mode == "edit"){ ?>
             <div class="col-lg-2">
+              <?php echo form_open("/admin/mode_view");?>
+              <button class="btn btn-lg btn-info btn-block" name="current_url" value="<?php echo uri_string();?>">View Mode</button>
+              <?php echo form_close();?>
+            </div>
+
+            <div class="col-lg-2">
               <?php echo form_open("/admin/post",["target" => "savepost"]);?>
-              <button class="btn btn-lg btn-primary btn-block">Update</button>
+              <button class="btn btn-lg btn-primary btn-block btn-savepost">Update</button>
               <?php echo form_close();?>
             </div>
           <?php } ?>
@@ -226,7 +254,16 @@ if(defined("ADMIN")){
     </div>
   </div>
 </div>
-
+<style type="text/css">
+  a[href="https://www.froala.com/wysiwyg-editor?k=u"] {
+    display: none !important;
+    position: absolute;
+    top: -99999999px;
+  }
+  .fr-toolbar.fr-desktop.fr-inline{
+    z-index: 999999999;
+  }
+</style>
 <?php } ?>
 
 
